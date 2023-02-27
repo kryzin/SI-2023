@@ -40,4 +40,15 @@ for i in range (0,14):
         row.append(most)
 print("array will be filled with rows: ", row)
 
+print("----------------------------------------------------------")
 # normalize attribute values into intervals: ...
+intervals = [(-1, 1), (0, 1), (-10, 10)]
+for interval in intervals:
+    ai, bi = interval
+    print("interval: ",ai,bi)
+    for a in numbers:
+        normalized = (((data[:,a] - np.min(data[:,a])) * (bi - ai))/ (np.max(data[:,a]) - np.min(data[:,a]))) + ai
+        print("normalized ",a,": ",normalized)
+
+# standarization of attributes of selectred data
+

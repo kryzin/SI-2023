@@ -50,5 +50,10 @@ for interval in intervals:
         normalized = (((data[:,a] - np.min(data[:,a])) * (bi - ai))/ (np.max(data[:,a]) - np.min(data[:,a]))) + ai
         print("normalized ",a,": ",normalized)
 
+print("---------------------------------------------------------")
 # standarization of attributes of selectred data
-
+for i in numbers:
+    variance = np.var(data[:,i])
+    mean = np.mean(data[:,i])
+    standardized = (data[:,i] - mean) / np.sqrt(variance)
+    print("standardized [",i,"] =", standardized)

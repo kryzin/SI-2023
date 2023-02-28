@@ -59,16 +59,29 @@ for i in numbers:
     mean = np.mean(X, axis=0)
     standardized = (X - mean) / variance
 
-    svariance = np.std(standardized)
-    smean = np.mean(standardized)
+    svariance = np.std(standardized, axis=0)
+    smean = np.mean(standardized, axis=0)
 
     print("------------------attribute nr", i)
     print("before standarization: ")
-    print("variance =", np.var(data[:,i]))
-    print("mean =", np.mean(data[:,i]))
+    print("variance =", variance)
+    print("mean =", mean)
     print("after standarization: ")
     print("variance =", svariance)
-    print("mean =", smean)
+    print("mean =", round(smean))
 
 # Format the data from file - convert symbolic values
+dt = np.dtype([('col1', np.int32), ('col2', 'U32'), ('col3', 'U32'), ('col4', np.int32),
+               ('col5', 'U16'), ('col6', 'U10'), ('col7', np.int32), ('col8', np.int32),
+               ('col9', np.float64), ('col10', np.int32), ('col11', np.int32), ('col12', np.int32),
+               ('col13', np.float64), ('col14', np.int32)])
+churn = np.genfromtxt('Churn_Modelling.csv', delimiter=',', dtype=dt, names=True)
 
+geo = churn['Geography']
+geo_map = {'France': 0, 'Spain': 1, 'Germany': 2}
+geo_dummy = np.zeros((len(geo), len(geo_map)))
+for k, v in geo_map.items():
+    geo_dummy[:, v] = np.where(geo == k, 1, 0)
+
+# churn = np.hstack((churn['CreditScore'], geo_dummy, churn['Geography']))
+print(churn[150])

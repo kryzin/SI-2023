@@ -52,14 +52,23 @@ for interval in intervals:
 
 print("---------------------------------------------------------")
 # standarization of attributes of selectred data
+data = data.astype(int)
 for i in numbers:
-    variance = np.var(data[:,i])
-    mean = np.mean(data[:,i])
-    standardized = (data[:,i] - mean) / np.sqrt(variance)
+    X = data[:,i]
+    variance = np.std(X, axis=0)
+    mean = np.mean(X, axis=0)
+    standardized = (X - mean) / variance
+
+    svariance = np.std(standardized)
+    smean = np.mean(standardized)
+
     print("------------------attribute nr", i)
     print("before standarization: ")
     print("variance =", np.var(data[:,i]))
     print("mean =", np.mean(data[:,i]))
     print("after standarization: ")
-    print("variance =", np.var(standardized))
-    print("mean =", np.mean(standardized))
+    print("variance =", svariance)
+    print("mean =", smean)
+
+# Format the data from file - convert symbolic values
+

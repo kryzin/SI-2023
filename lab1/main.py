@@ -84,4 +84,19 @@ for k, v in geo_map.items():
     geo_dummy[:, v] = np.where(geo == k, 1, 0)
 
 # churn = np.hstack((churn['CreditScore'], geo_dummy, churn['Geography']))
+# merged = np.hstack((geo_dummy, churn))
+# merged = np.concatenate((geo_dummy, churn), axis=None)
+# print(merged[150])
+print(geo_dummy.shape)
+print(type(churn))
+new_churn = []
+for i in range(len(churn)):
+    temp = list(churn[i])
+    temp.insert(0, int(geo_dummy[i, 2]))
+    temp.insert(0, int(geo_dummy[i, 1]))
+    new_churn.append(tuple(temp))
 print(churn[150])
+print(geo_dummy[150])
+print(new_churn[150])
+# print(type(churn))
+# print(geo_dummy.shape)
